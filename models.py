@@ -1,25 +1,26 @@
 from django.db import models
 
-from django.db import models
 
-class Admin(models.Model):
-    a_id = models.CharField(primary_key=True, max_length=50)
-    password = models.CharField(max_length=255)
-
-class Employee(models.Model):
-    e_id = models.CharField(primary_key=True, max_length=50)
+class members(models.Model):
     name = models.CharField(max_length=255)
-    phno = models.CharField(max_length=15)
-    email = models.EmailField()
-    password = models.CharField(max_length=255)
-    sal_package = models.DecimalField(max_digits=10, decimal_places=2)
+    phno = models.IntegerField()  # Assuming a string representation for phone number
+    package_name = models.CharField(max_length=100)
+    m_id = models.CharField(max_length=50, unique=True)  # Assuming a unique member ID
+    password = models.CharField(max_length=255)  # Storing passwords as plaintext is not recommended in production
+    e_id = models.ForeignKey(employee, on_delete=models.CASCADE)
 
-class Member(models.Model):
-    m_id = models.CharField(primary_key=True, max_length=50)
-    name = models.CharField(max_length=255)
-    phno = models.CharField(max_length=15)
-    email = models.EmailField()
-    password = models.CharField(max_length=255)
-    e_id = models.ForeignKey(Employee, on_delete=models.CASCADE)
-    current_package = models.CharField(max_length=255)  
 
+class emplyoee(models.Model):
+    name=models.CharField(max_length=25)
+    phno=models.IntegerField()
+    curr_package=models.IntegerField()
+    e_id=models.CharField(max_length=5)
+    password=models.CharField(max_length=10)
+
+
+class adminlogin(models.Model):
+     a_id=models.CharField(max_length=5)
+     password=models.CharField(max_length=10)
+
+def __str__(self):
+        return self.name
